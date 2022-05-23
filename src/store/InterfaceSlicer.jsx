@@ -13,9 +13,9 @@ const interfaceSlice = createSlice({
                 status: action.payload.status,
                 title: action.payload.title,
                 message: action.payload.message,
-            }
-        }
-    }
+            };
+        },
+    },
 });
 
 export const interfaceActions = interfaceSlice.actions;

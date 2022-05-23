@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -17,7 +17,7 @@ const cartSlice = createSlice({
 
         addItem: (state, action) => {
             const newItem = action.payload;
-            const index = state.items.find(item => item.id === newItem.id)
+            const index = state.items.find((item) => item.id === newItem.id);
             state.filled = true;
 
             if (!index) {
@@ -27,7 +27,7 @@ const cartSlice = createSlice({
                     price: newItem.price,
                     quantity: 1,
                     totalPrice: newItem.price,
-                })
+                });
             } else {
                 index.quantity++;
                 index.totalPrice += newItem.price;
@@ -37,21 +37,21 @@ const cartSlice = createSlice({
         },
 
         removeItem: (state, action) => {
-             const id = action.payload;
-             const index = state.items.find(item => item.id === id)
-             state.filled = true;
+            const id = action.payload;
+            const index = state.items.find((item) => item.id === id);
+            state.filled = true;
 
-             if (index.quantity === 1) {
-                state.items = state.items.filter(item => item.id !== id)
-             } else {
-                 index.totalPrice -= index.price;
-                 index.quantity--;
-                }
+            if (index.quantity === 1) {
+                state.items = state.items.filter((item) => item.id !== id);
+            } else {
+                index.quantity--;
+                index.totalPrice -= index.price;
+            }
             state.totalQuantity--;
             state.totalPrice -= index.price;
         },
-    }
-})
+    },
+});
 
 export const cartActions = cartSlice.actions;
 

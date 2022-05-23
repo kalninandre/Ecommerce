@@ -5,31 +5,32 @@ import { useDispatch } from 'react-redux';
 import { cartActions } from '../../store/CartSlicer';
 
 const ProductItem = ({ id, title, price, description }) => {
+    const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
+    const addItem = () => {
+        dispatch(
+            cartActions.addItem({
+                id,
+                title,
+                price,
+            })
+        );
+    };
 
-  const addItem = () => {
-    dispatch(cartActions.addItem({
-      id,
-      title,
-      price,
-    }))
-  }
-
-  return (
-    <li className={classes.item}>
-      <Card>
-        <header>
-          <h3>{title}</h3>
-          <div className={classes.price}>${price.toFixed(2)}</div>
-        </header>
-        <p>{description}</p>
-        <div className={classes.actions}>
-          <button onClick={addItem}>Add to Cart</button>
-        </div>
-      </Card>
-    </li>
-  );
+    return (
+        <li className={classes.item}>
+            <Card>
+                <header>
+                    <h3>{title}</h3>
+                    <div className={classes.price}>$ {price.toFixed(2)}</div>
+                </header>
+                <p>{description}</p>
+                <div className={classes.actions}>
+                    <button onClick={addItem}>Add to Cart</button>
+                </div>
+            </Card>
+        </li>
+    );
 };
 
 export default ProductItem;
